@@ -7,48 +7,22 @@
 <aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-		   	<li style="background-image: url(/static/images/background.jpg);">
+		   	{% for slider in sliders %}
+		   	<li style="background-image: url(/media/{{ slider.photo }}">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>М. Тынышбаев атындағы ҚазККА Шымкент көлік колледжі</h1>
-									<h2>Сұрақтар болатын болса </h2>
+			   					<h1>{{ slider.main_title }}</h1>
+									<h2>{{ slider.mini_description }} </h2>
 									<p><a class="btn btn-primary btn-lg" href="#">Бізбен байланысыңыз</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url(/static/images/background1.jpg);">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="row">
-			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-			   				<div class="slider-text-inner">
-			   					<h1>М. Тынышбаев атындағы ҚазККА Шымкент көлік колледжі</h1>
-									<h2>Сұрақтар болатын болса </h2>
-									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Бізбен байланысыңыз</a></p>
-			   				</div>
-			   			</div>
-			   		</div>
-		   		</div>
-		   	</li>
-		   	<li style="background-image: url(/static/images/background2.jpg);">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="row">
-			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-			   				<div class="slider-text-inner">
-			   					<h1>М. Тынышбаев атындағы ҚазККА Шымкент көлік колледжі</h1>
-									<h2>Сұрақтар болатын болса </h2>
-									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Бізбен байланысыңыз</a></p>
-			   				</div>
-			   			</div>
-			   		</div>
-		   		</div>
-		   	</li>		   	
+			{% endfor %}
 		  	</ul>
 	  	</div>
 	</aside>
@@ -56,57 +30,27 @@
 	<div id="fh5co-course-categories">
 		<div class="container">
 			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-					<h2>Басқа колледждерден айырмашылығымыз</h2>
-					<p>Бізде бәрі бар</p>
+				{% for icon in icons %}
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<h2>{{ icon.main_title}}</h2>
+					<p>{{ icon.description}}</p>
 				</div>
+				{% endfor %}
 			</div>
 			<div class="row">
+				{% for icon in icons %}
 				<div class="col-md-3 col-sm-6 text-center animate-box">
 					<div class="services">
 						<span class="icon">
-							<i class="icon-home-outline"></i>
+							<i class="{{ icon.name }}"></i>
 						</span>
 						<div class="desc">
-							<h3><a href="#">Корпус</a></h3>
-							<p>Заман талабына сай корпустарда оқи аласыз</p>
+							<h3><a href="#">{{ icon.title }}</a></h3>
+							<p>{{ icon.mini_description }}</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-6 text-center animate-box">
-					<div class="services">
-						<span class="icon">
-							<i class="icon-heart4"></i>
-						</span>
-						<div class="desc">
-							<h3><a href="#">Студенттік өмір</a></h3>
-							<p>Студенттік өмірді есте қалатындай өткізе аласыз.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 text-center animate-box">
-					<div class="services">
-						<span class="icon">
-							<i class="icon-study"></i>
-						</span>
-						<div class="desc">
-							<h3><a href="#">Жетістіктер</a></h3>
-							<p>Жетістіктерге жете аласыз</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 text-center animate-box">
-					<div class="services">
-						<span class="icon">
-							<i class="icon-clipboard"></i>
-							<!-- <img style="width: 37px; margin: 25px; color: white;" src="fonts/icomoon/IcoMoon/SVG/084-calendar.svg"> -->
-						</span>
-						<div class="desc">
-							<h3><a href="#">Расписание</a></h3>
-							<p>Өзіңіз үшін ыңғайлы кестелер таңдай аласыз</p>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -117,26 +61,13 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row">
+						{% for about in abouts %}
 						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-world"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="3297" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Пәндер</span>
+							<span class="icon"><i class="{{ about.logo }}"></i></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="{{ about.count }}" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">{{ about.name }}</span>
 						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="3700" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Студенттер саны</span>
-						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-user2"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="5034" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Түлектер</span>
-						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-head"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="1080" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Оқытушылар</span>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
@@ -146,58 +77,29 @@
 	<div id="fh5co-course">
 		<div class="container">
 			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-					<h2>Біздегі мамандықтар</h2>
-					<p>Әр түрлі мамандықтарды таңдай аласыз</p>
+				{% for specialty in specialtys %}
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<h2>{{ specialty.main_title }}</h2>
+					<p>{{ specialty.mini_description }}</p>
 				</div>
+				{% endfor %}
 			</div>
 			<div class="row">
+				{% for specialty in specialtys %}
 				<div class="col-md-6 animate-box">
 					<div class="course">
-						<a href="#" class="course-img" 
-						style="background-image: url(/static/images/ұйымдастырушы.jpg);">
+						<a href="#" class="course-img"
+						style="background-image: url(/media/{{ specialty.photo }});">
 						</a>
 						<div class="desc">
-							<h3><a href="#">Ұйымдастырушы техник</a></h3>
-							<p>Темір жол көлігінде тасымалдауды ұйымдастыру және қозғалысты басқару</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Толығырақ</a>
+							<h3><a href="#">{{ specialty.title }}</a></h3>
+							<p>{{ specialty.description }}</p>
+							<span><a href="courses.html" class="btn btn-primary btn-sm btn-course">Толығырақ</a>
 							</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 animate-box">
-					<div class="course">
-						<a href="#" class="course-img" style="background-image: url(/static/images/электромеханик.jpg);">
-						</a>
-						<div class="desc">
-							<h3><a href="#">Техник электромеханик</a></h3>
-							<p>Темір жол жылжымалы құрамдарын пайдалану және техникалық күту</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Толығырақ</a></span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="course">
-					<a href="#" class="course-img" style="background-image: url(/static/images/машинист.jpg);">
-						</a>
-						<div class="desc">
-							<h3><a href="#">Тепловоз машинисі</a></h3>
-							<p>Темір жол жылжымалы құрамдарын пайдалану және техникалық күту</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Толығырақ</a></span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<div class="course">
-						<a href="#" class="course-img" style="background-image: url(/static/images/машинист1.jpg);">
-						</a>
-						<div class="desc">
-							<h3><a href="#">Электровоз машинисі</a></h3>
-							<p>Темір жол жылжымалы құрамдарын пайдалану және техникалық күту</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Толығырақ</a></span>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -214,33 +116,17 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row animate-box">
 						<div class="owl-carousel owl-carousel-fullwidth">
+							{% for comentary in comentarys %}
 							<div class="item">
 								<div class="testimony-slide active text-center">
-									<div class="user" style="background-image: url(/static/images/person1.jpg);"></div>
-									<span>Бекполат Сарсекенов<br><small>Студент</small></span>
+									<div class="user" style="background-image: url(/media/{{ comentary.photo }});"></div>
+									<span>{{ comentary.last_name }} {{ comentary.first_name }}<br><small>{{ comentary.position }}</small></span>
 									<blockquote>
-										<p>&ldquo;Қазақстандағы ең жақсы колледждердің бірі.&rdquo;</p>
+										<p>&ldquo;{{ comentary.mini_description }}&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<div class="user" style="background-image: url(/static/images/person1.jpg);"></div>
-									<span>Бекполат Сарсекенов<br><small>Студент</small></span>
-									<blockquote>
-										<p>&ldquo;Қазақстандағы ең жақсы колледждердің бірі.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<div class="user" style="background-image: url(/static/images/person1.jpg);"></div>
-									<span>Бекполат Сарсекенов<br><small>Студент</small></span>
-									<blockquote>
-										<p>&ldquo;Қазақстандағы ең жақсы колледждердің бірі.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>
@@ -251,43 +137,26 @@
 	<div id="fh5co-blog">
 		<div class="container">
 			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Жаңалықтар</h2>
-					<p>Колледж қабырғасындағы жаңалықтарды біліп отыра аласыз</p>
+				{% for new in news %}
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<h2>{{ new.title }}</h2>
+					<p>{{ new.mini_description }}</p>
 				</div>
+				{% endfor %}
 			</div>
 			<div class="row">
+				{% for new in news %}
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="news.html" class="blog-img-holder" style="background-image: url(/static/images/project-1.jpg);"></a>
+						<a href="news.html" class="blog-img-holder" style="background-image: url(/media/{{ new.photo1 }}"></a>
 						<div class="blog-text">
-							<h3><a href="news.html">8-март жаңалығы</a></h3>
-							<span class="posted_on">Март 15</span>
-							<p>8 — наурыз халықаралық әйелдер күнімен шын жүректен құттықтаймыз!Көктемнің гүліндей құлпырып, әсемдіктің, әдеміліктің, әдептіліктің иесі болып, бақытты да баянды өмір кешіңіздер!</p>
-						</div> 
+							<h3><a href="news.html">{{ new.name }}</a></h3>
+							<span class="posted_on">{{ new.date }}</span>
+							<p>{{ new.description }}</p>
+						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="news.html" class="blog-img-holder" style="background-image: url(/static/images/project-2.jpg);"></a>
-						<div class="blog-text">
-							<h3><a href="news.html">8-март жаңалығы</a></h3>
-							<span class="posted_on">Март 15</span>
-							<p>8 — наурыз халықаралық әйелдер күнімен шын жүректен құттықтаймыз!Көктемнің гүліндей құлпырып, әсемдіктің, әдеміліктің, әдептіліктің иесі болып, бақытты да баянды өмір кешіңіздер!</p>
-						</div> 
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="news.html" class="blog-img-holder" style="background-image: url(/static/images/project-3.jpg);"></a>
-						<div class="blog-text">
-							<h3><a href="news.html">8-март жаңалығы</a></h3>
-							<span class="posted_on">Март 15</span>
-							
-							<p>8 — наурыз халықаралық әйелдер күнімен шын жүректен құттықтаймыз!Көктемнің гүліндей құлпырып, әсемдіктің, әдеміліктің, әдептіліктің иесі болып, бақытты да баянды өмір кешіңіздер!</p>
-						</div>  
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -334,11 +203,11 @@
 							<input type="submit" value="Жіберу" class="btn btn-primary">
 						</div>
 
-					</form>		
+					</form>
 				</div>
 				</div>
-			</div> 
-			
+			</div>
+
 		</div>
 	</div>
 

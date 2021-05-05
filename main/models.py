@@ -27,6 +27,7 @@ class Information(models.Model):
     menu_info3 = models.CharField(max_length=300, blank=True)
     menu_info3_link = models.CharField(max_length=300, blank=True)
     status = models.IntegerField(default=0, blank=True)
+    logo = models.ImageField(upload_to='upload', blank=True)
 
     def __str__(self):
         return self.address
@@ -48,16 +49,19 @@ class Icon(models.Model):
     description = models.CharField(max_length=500, blank=True)
     #icon = models.ImageField(upload_to='upload', blank=True)
     name = models.CharField(max_length=300, blank=True)
+    title = models.CharField(max_length=300, blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
+    link = models.CharField(max_length=300, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
 
 
     def __str__(self):
-        return self.main_title
+        return self.title
 
 class About(models.Model):
-    icon = models.ImageField(upload_to='upload', blank=True)
+    # icon = models.ImageField(upload_to='upload', blank=True)
+    logo = models.CharField(max_length=300, blank=True)
     name = models.CharField(max_length=300, blank=True)
     count = models.IntegerField(default=0)
     status = models.IntegerField(default=0)
