@@ -41,6 +41,12 @@ class NewsAdmin(admin.ModelAdmin):
 admin.site.register(News, NewsAdmin)
 
 
+class KartaAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Karta, KartaAdmin)
+
+
+
 class RegisterAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Register, RegisterAdmin)

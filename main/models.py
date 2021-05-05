@@ -101,22 +101,30 @@ class Comentary(models.Model):
         return self.last_name
 
 class News(models.Model):
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=300, blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
     photo1 = models.ImageField(upload_to='upload')
     photo2 = models.ImageField(upload_to='upload')
     photo3 = models.ImageField(upload_to='upload')
     name = models.CharField(max_length=300)
-    date = models.IntegerField(default=0)
-    description = models.CharField(max_length=500, blank=True)
+    date = models.CharField(max_length=300, blank=True)
+    description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
 
 
     def __str__(self):
-        return self.title
+        return self.name
 
+
+class Karta(models.Model):
+    main_title = models.CharField(max_length=300, blank=True)
+    mini_description = models.CharField(max_length=500, blank=True)
+    address_link = models.CharField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.main_title
 
 class Register(models.Model):
     last_name = models.CharField(max_length=300)

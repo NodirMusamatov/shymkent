@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from main.models import Information, Slider, Icon, About, Specialty, Comentary, News, Register, Galery
-from main.models import Teacher, Baza, Qabyldau, Biliktilik, Video, KollejTarihi, License, Acredatsiya
+from main.models import Teacher, Baza, Qabyldau, Biliktilik, Video, KollejTarihi, License, Acredatsiya, Karta
 from main.models import Qurylym, OquAdisteme, AdistemelikKabinet, JasMaman, Birlestikter, Jetistikter, Qashyqtyq
 from main.models import OquUrdisi, SabaqKeste, StudentJetistik, Aqparat, JumysqaOrnalasu, Seriktester, Saualnama
 import math
@@ -17,6 +17,7 @@ def indexHandler(request):
     comentarys = Comentary.objects.filter(status=0).order_by('-rating').filter(is_main=True)
     news = News.objects.filter(status=0).order_by('-rating').filter(is_main=True)
     galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
+    kartas = Karta.objects.all()
 
     return render(request, 'index.html', {
         'informations': informations,
@@ -26,5 +27,6 @@ def indexHandler(request):
         'specialtys': specialtys,
         'comentarys': comentarys,
         'news': news,
-        'galerys': galerys
+        'galerys': galerys,
+        'kartas': kartas
     })
