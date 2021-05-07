@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+	{% block content %}
+
+
+
+
+	<div class="container">
+		{% for k in keste %}
+			<div class="card">
+			  <h5 class="card-header"><img style="width: 100%; height: 450px;" src="/media/{{ k.photo }}"></h5>
+			  <div class="card-body">
+			    <h5 class="card-title">{{ k.title }}</h5>
+			    <p class="card-text"> {{ k.short_description }}</p>
+				  </div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+
+
+
+	{% endblock %}

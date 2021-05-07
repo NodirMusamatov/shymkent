@@ -19,7 +19,11 @@ from django.conf.urls import url, include
 from django.views.static import serve
 from college import settings
 from main.views import indexHandler, NewsDetailHandler, SpecialtyDetailHandler, CourseHandler,  TeacherHandler
-from main.views import AboutHandler, BazaHandler, VideoHandler
+from main.views import AboutHandler, BazaHandler, VideoHandler, QabyldauHandler, BiliktilikHandler, LicenseHandler
+from main.views import AcredatsiyaHandler, QurylymHandler, OquAdistemeHandler, AdistemelikKabinetHandler
+from main.views import JasMamanHandler, BirlestikHandler, JetistikHandler, OquHandler, OquUrdisiHandler, KesteHandler
+from main.views import StudentHandler, AqparatHandler, JumysqaOrnalasuHandler,  PartnerHandler, SaualnamaHandler
+
 
 
 urlpatterns = [
@@ -32,6 +36,25 @@ urlpatterns = [
     path('teachers/', TeacherHandler),
     path('baza/', BazaHandler),
     path('video/', VideoHandler),
+    path('qabyldau/', QabyldauHandler),
+    path('biliktilik/', BiliktilikHandler),
+    path('license/', LicenseHandler),
+    path('acredatsiya/', AcredatsiyaHandler),
+    path('qurylym/', QurylymHandler),
+    path('oqu-adisteme/', OquAdistemeHandler),
+    path('adisteme-kabineti/', AdistemelikKabinetHandler),
+    path('jas-maman/', JasMamanHandler),
+    path('birlestik/', BirlestikHandler),
+    path('jetistik/', JetistikHandler),
+    path('oqu/', OquHandler),
+    path('oqu-urdisi/', OquUrdisiHandler),
+    path('keste/', KesteHandler),
+    path('student/', StudentHandler),
+    path('aqparat/', AqparatHandler),
+    path('jumysqa-ornalasu/', JumysqaOrnalasuHandler),
+    path('partner/', PartnerHandler),
+    path('saualnama/', SaualnamaHandler),
+
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT

@@ -221,6 +221,7 @@ class License(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
 
@@ -257,6 +258,7 @@ class AdistemelikKabinet(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
 
@@ -266,6 +268,7 @@ class JasMaman(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
 
