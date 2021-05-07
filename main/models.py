@@ -148,9 +148,10 @@ class Galery(models.Model):
 
 class Teacher(models.Model):
     photo = models.ImageField(upload_to='upload')
-    last_name = models.CharField(max_length=300)
-    first_name = models.CharField(max_length=300)
-    position = models.CharField(max_length=300)
+    last_name = models.CharField(max_length=300, blank=True)
+    first_name = models.CharField(max_length=300, blank=True)
+    surname = models.CharField(max_length=300, blank=True)
+    position = models.CharField(max_length=300, blank=True)
     facebook = models.CharField(max_length=300, blank=True)
     instagram = models.CharField(max_length=300, blank=True)
     whatsapp = models.CharField(max_length=300, blank=True)
@@ -195,8 +196,9 @@ class Biliktilik(models.Model):
         return self.title
 
 class Video(models.Model):
-    title = models.CharField(max_length=300)
-    vide_link = models.CharField(max_length=300)
+    title = models.CharField(max_length=300, blank=True)
+    vide_link = models.CharField(max_length=300, blank=True)
+    description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
 

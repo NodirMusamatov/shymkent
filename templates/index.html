@@ -94,7 +94,7 @@
 						<div class="desc">
 							<h3><a href="#">{{ specialty.title }}</a></h3>
 							<p>{{ specialty.description }}</p>
-							<span><a href="courses.html" class="btn btn-primary btn-sm btn-course">Толығырақ</a>
+							<span><a href="/specialty/{{ specialty.id }}/" class="btn btn-primary btn-sm btn-course">Толығырақ</a>
 							</span>
 						</div>
 					</div>
@@ -152,7 +152,7 @@
 					<div class="fh5co-blog animate-box">
 						<a href="news.html" class="blog-img-holder" style="background-image: url(/media/{{ new.photo1 }}"></a>
 						<div class="blog-text">
-							<h3><a href="news.html">{{ new.name }}</a></h3>
+							<h3><a href="/news/{{ new.id }}/">{{ new.name }}</a></h3>
 							<span class="posted_on">{{ new.date }}</span>
 							<p>{{ new.description }}</p>
 						</div>
@@ -172,28 +172,29 @@
 				</div>
 			<div class="row">
 				<div class="col-sm-7">
-					<iframe src="{{ karta.address_link }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					<iframe src="{{ karta.address_link }}" width="750" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 				</div>
 				<div class="col-sm-5">
 					<div class="col-md animate-box">
 					<h3>Колледж директорының блогы</h3>
-					<form action="#">
+						<form id="request"  action="/" method="post">
+              				{% csrf_token %}
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
-								<input type="text" id="fname" class="form-control" placeholder="Есіміңіз">
+								<input type="text" id="fname" class="form-control" placeholder="Есіміңіз" name="last_name">
 							</div>
 							<div class="col-md-6">
 								<!-- <label for="lname">Last Name</label> -->
-							<input type="text" id="lname" class="form-control" placeholder="Фамилияңыз">
+							<input type="text" id="lname" class="form-control" placeholder="Фамилияңыз" name="first_name">
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
 								<!-- <label for="email">Email</label> -->
-								<input type="text" id="email" class="form-control" placeholder="Телефон номеріңіз">
+								<input type="number" id="phone" class="form-control" placeholder="Телефон номеріңіз" name="phone">
 							</div>
 						</div>
 
@@ -204,7 +205,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Жіберу" class="btn btn-primary">
+							<button type="submit" value="Жіберу" class="btn btn-primary">Жіберу</button>
 						</div>
 
 					</form>

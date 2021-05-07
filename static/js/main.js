@@ -294,3 +294,24 @@
 
 
 }());
+
+
+
+$("#request").submit(function() {
+	    oData = $('#request').serialize();
+
+	    $.ajax({
+            type: 'POST',
+            url: '/',
+            dataType: 'html',
+            data: oData,
+            success:function(){
+                alert("Успешно отправлено");
+                $('#request input').val('');
+                $('#request textarea').val('');
+            }
+	    })
+
+
+		return false;
+	});

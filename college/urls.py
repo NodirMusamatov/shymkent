@@ -18,15 +18,22 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.views.static import serve
 from college import settings
-from main.views import indexHandler
-
+from main.views import indexHandler, NewsDetailHandler, SpecialtyDetailHandler, CourseHandler,  TeacherHandler
+from main.views import AboutHandler, BazaHandler, VideoHandler
 
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+    path('news/<int:news_id>/', NewsDetailHandler),
+    path('specialty/<int:specialty_id>/', SpecialtyDetailHandler),
+    path('courses/', CourseHandler),
+    path('about/', AboutHandler),
+    path('teachers/', TeacherHandler),
+    path('baza/', BazaHandler),
+    path('video/', VideoHandler),
 
-    url(r'^media/(?P<path>.*)$', serve,{
+    url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT
     }),
 
