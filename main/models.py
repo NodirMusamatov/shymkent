@@ -77,7 +77,7 @@ class Specialty(models.Model):
     mini_description = models.CharField(max_length=500, blank=True)
     photo = models.ImageField(upload_to='upload', blank=True)
     title = models.CharField(max_length=300, blank=True)
-    description = models.CharField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
