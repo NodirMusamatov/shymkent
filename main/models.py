@@ -118,7 +118,7 @@ class Comentary(models.Model):
 
 
     def __str__(self):
-        return self.last_name
+        return self.last_name + ' ' + self.lang.code
 
 class News(models.Model):
     title = models.CharField(max_length=300, blank=True)
@@ -146,7 +146,7 @@ class Karta(models.Model):
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
-        return self.main_title
+        return self.main_title + ' ' + self.lang.code
 
 class Register(models.Model):
     last_name = models.CharField(max_length=300)

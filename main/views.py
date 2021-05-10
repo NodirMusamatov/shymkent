@@ -27,10 +27,12 @@ def indexHandler(request):
         news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         galerys = Galery.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         kartas = Karta.objects.filter(lang__code=current_lang)
+        print('*'*100)
+        print(comentarys)
 
         return render(request, 'index.html', {
             'langs':langs,
-            'trans_values':trans_values,
+            'trans_values': trans_values,
             'informations': informations,
             'sliders': sliders,
             'icons': icons,
