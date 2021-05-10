@@ -3,6 +3,14 @@ from main.models import *
 
 # Register your models here.
 
+class LanguagesAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Languages, LanguagesAdmin)
+
+class TransValueAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TransValue, TransValueAdmin)
+
 class InformationAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Information, InformationAdmin)

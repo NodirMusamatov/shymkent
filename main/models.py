@@ -1,7 +1,23 @@
 from django.db import models
 
+class Languages(models.Model):
+    title = models.CharField(max_length=300, blank=True)
+    code = models.CharField(max_length=300, blank=True)
+    extra_title = models.CharField(max_length=300, blank=True)
+    def __str__(self):
+        return self.title
+
+class TransValue(models.Model):
+    code = models.CharField(max_length=300, blank=True)
+    title = models.CharField(max_length=300, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+
+    def __str__(self):
+        return self.title + ' ' + self.code
 # Create your models here.
 class Information(models.Model):
+    knopka = models.CharField(max_length=300, blank=True)
+    knopka_link = models.CharField(max_length=300, blank=True)
     address = models.CharField(max_length=300, blank=True)
     address_name = models.CharField(max_length=300, blank=True)
     facebook_info = models.CharField(max_length=300, blank=True)
@@ -28,6 +44,7 @@ class Information(models.Model):
     menu_info3_link = models.CharField(max_length=300, blank=True)
     status = models.IntegerField(default=0, blank=True)
     logo = models.ImageField(upload_to='upload', blank=True)
+    lang = models.ForeignKey(Languages,  on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.address
@@ -38,6 +55,7 @@ class Slider(models.Model):
     mini_description = models.CharField(max_length=500, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
 
     def __str__(self):
@@ -54,7 +72,7 @@ class Icon(models.Model):
     link = models.CharField(max_length=300, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
-
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -66,7 +84,7 @@ class About(models.Model):
     count = models.IntegerField(default=0)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
-
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.name
@@ -81,6 +99,7 @@ class Specialty(models.Model):
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
 
     def __str__(self):
@@ -95,6 +114,7 @@ class Comentary(models.Model):
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
 
     def __str__(self):
@@ -112,6 +132,7 @@ class News(models.Model):
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
 
     def __str__(self):
@@ -122,6 +143,7 @@ class Karta(models.Model):
     main_title = models.CharField(max_length=300, blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
     address_link = models.CharField(max_length=500, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.main_title
@@ -131,7 +153,7 @@ class Register(models.Model):
     first_name = models.CharField(max_length=300)
     phone = models.CharField(max_length=300)
     message = models.TextField()
-
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.last_name
 
@@ -141,6 +163,7 @@ class Galery(models.Model):
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.name
@@ -159,6 +182,7 @@ class Teacher(models.Model):
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.last_name
@@ -170,6 +194,7 @@ class Baza(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -181,6 +206,7 @@ class Qabyldau(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -191,6 +217,7 @@ class Biliktilik(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -201,6 +228,7 @@ class Video(models.Model):
     description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -211,6 +239,7 @@ class KollejTarihi(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -221,6 +250,7 @@ class License(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -231,6 +261,7 @@ class Acredatsiya(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -240,6 +271,7 @@ class Qurylym(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -249,6 +281,7 @@ class OquAdisteme(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -258,6 +291,7 @@ class AdistemelikKabinet(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -268,6 +302,7 @@ class JasMaman(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title
@@ -278,6 +313,7 @@ class Birlestikter(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -287,6 +323,7 @@ class Jetistikter(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -296,6 +333,7 @@ class Qashyqtyq(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -305,6 +343,7 @@ class OquUrdisi(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -314,6 +353,7 @@ class SabaqKeste(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -323,6 +363,7 @@ class StudentJetistik(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -332,6 +373,7 @@ class Aqparat(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -341,6 +383,7 @@ class JumysqaOrnalasu(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -350,6 +393,7 @@ class Seriktester(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
@@ -359,6 +403,7 @@ class Saualnama(models.Model):
     short_description = models.CharField(max_length=600, blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 

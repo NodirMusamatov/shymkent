@@ -5,22 +5,32 @@ from main.models import Teacher, Baza, Qabyldau, Biliktilik, Video, KollejTarihi
 from main.models import Qurylym, OquAdisteme, AdistemelikKabinet, JasMaman, Birlestikter, Jetistikter, Qashyqtyq
 from main.models import OquUrdisi, SabaqKeste, StudentJetistik, Aqparat, JumysqaOrnalasu, Seriktester, Saualnama
 import math
+from main.models import Languages, TransValue
 
 # Create your views here.
 
 def indexHandler(request):
     if request.method == 'GET':
-        informations = Information.objects.all()
-        sliders = Slider.objects.filter(status=0).order_by('-rating')
-        icons = Icon.objects.filter(status=0).order_by('-rating')
-        abouts = About.objects.filter(status=0).order_by('-rating')
-        specialtys = Specialty.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-        comentarys = Comentary.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-        news = News.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-        galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-        kartas = Karta.objects.all()
+        if request.GET.get('lang', ''):
+            request.session['lang'] = request.GET.get('lang', '')
+
+        current_lang = request.session.get('lang', 'ru')
+        langs = Languages.objects.all()
+        trans_values = TransValue.objects.filter(lang__code = current_lang)
+
+        informations = Information.objects.filter(lang__code=current_lang)
+        sliders = Slider.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating')
+        icons = Icon.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating')
+        abouts = About.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating')
+        specialtys = Specialty.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
+        comentarys = Comentary.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
+        news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
+        galerys = Galery.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
+        kartas = Karta.objects.filter(lang__code=current_lang)
 
         return render(request, 'index.html', {
+            'langs':langs,
+            'trans_values':trans_values,
             'informations': informations,
             'sliders': sliders,
             'icons': icons,
@@ -52,60 +62,88 @@ def indexHandler(request):
 
 
 def NewsDetailHandler(request, news_id):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+
     news_items = News.objects.get(id=int(news_id))
 
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    news = News.objects.filter(status=0).order_by('-rating').filter(is_main=True)
+    informations = Information.objects.filter(lang__code=current_lang)
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    news = News.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
     return render(request, 'news-detail.html', {
         'news': news,
         'news_items': news_items,
         'informations': informations,
-        'galerys': galerys
+        'galerys': galerys,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 def SpecialtyDetailHandler(request, specialty_id):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+
     specialty_items = Specialty.objects.get(id=int(specialty_id))
 
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    specialtys = Specialty.objects.filter(status=0).order_by('-rating').filter(is_main=True)
+    informations = Information.objects.filter(lang__code=current_lang)
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    specialtys = Specialty.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
     return render(request, 'specialty-detail.html', {
         'specialty_items': specialty_items,
         'informations': informations,
         'galerys': galerys,
-        'specialtys': specialtys
+        'specialtys': specialtys,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def CourseHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    specialtys = Specialty.objects.filter(status=0).order_by('-rating').filter(is_main=True)
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+
+    informations = Information.objects.filter(lang__code=current_lang)
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    specialtys = Specialty.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
     return render(request, 'courses.html', {
         'informations': informations,
         'galerys': galerys,
-        'specialtys': specialtys
+        'specialtys': specialtys,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def TeacherHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    teachers = Teacher.objects.filter(status=0).order_by('-rating').filter(is_main=True)
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    teachers = Teacher.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
     return render(request, 'teacher.html', {
         'informations': informations,
         'galerys': galerys,
-        'teachers': teachers
+        'teachers': teachers,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def AboutHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    about = KollejTarihi.objects.filter(status=0).order_by('-rating')
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    about = KollejTarihi.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'about.html', {
         'informations': informations,
@@ -116,254 +154,392 @@ def AboutHandler(request):
 
 
 def BazaHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    baza = Baza.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    baza = Baza.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'baza.html', {
         'informations': informations,
         'galerys': galerys,
-        'baza': baza
+        'baza': baza,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 def VideoHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    video = Video.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    video = Video.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'video.html', {
         'informations': informations,
         'galerys': galerys,
-        'video': video
+        'video': video,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def QabyldauHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    qabyldau = Qabyldau.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    qabyldau = Qabyldau.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'qabyldau.html', {
         'informations': informations,
         'galerys': galerys,
-        'qabyldau': qabyldau
+        'qabyldau': qabyldau,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 
 def BiliktilikHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    biliktilik = Biliktilik.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    biliktilik = Biliktilik.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'biliktilik.html', {
         'informations': informations,
         'galerys': galerys,
-        'biliktilik': biliktilik
+        'biliktilik': biliktilik,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 def LicenseHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    license = License.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    license = License.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'license.html', {
         'informations': informations,
         'galerys': galerys,
-        'license': license
+        'license': license,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def AcredatsiyaHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    acredatsiya = Acredatsiya.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    acredatsiya = Acredatsiya.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'acredatsiya.html', {
         'informations': informations,
         'galerys': galerys,
+        'langs': langs,
+        'trans_values': trans_values,
         'acredatsiya': acredatsiya
     })
 
 
 def QurylymHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    qurylym = Qurylym.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    qurylym = Qurylym.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'qurylym.html', {
         'informations': informations,
         'galerys': galerys,
-        'qurylym': qurylym
+        'qurylym': qurylym,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def OquAdistemeHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    adisteme = OquAdisteme.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    adisteme = OquAdisteme.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'oqu-adisteme.html', {
         'informations': informations,
         'galerys': galerys,
-        'adisteme': adisteme
+        'adisteme': adisteme,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 def AdistemelikKabinetHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    kabinet = AdistemelikKabinet.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    kabinet = AdistemelikKabinet.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'adisteme-kabineti.html', {
         'informations': informations,
         'galerys': galerys,
-        'kabinet': kabinet
+        'kabinet': kabinet,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def JasMamanHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    maman = JasMaman.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    maman = JasMaman.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'jas-maman.html', {
         'informations': informations,
         'galerys': galerys,
-        'maman': maman
+        'maman': maman,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def BirlestikHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    birlestik = Birlestikter.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang).filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    birlestik = Birlestikter.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
     return render(request, 'birlestik.html', {
         'informations': informations,
         'galerys': galerys,
-        'birlestik': birlestik
+        'birlestik': birlestik,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 def JetistikHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    jetistik = Jetistikter.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    jetistik = Jetistikter.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'jetistik.html', {
         'informations': informations,
         'galerys': galerys,
-        'jetistik': jetistik
+        'jetistik': jetistik,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def OquHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    oqu = Qashyqtyq.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    oqu = Qashyqtyq.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'oqu.html', {
         'informations': informations,
         'galerys': galerys,
-        'oqu': oqu
+        'oqu': oqu,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def OquUrdisiHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    oqu = OquUrdisi.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    oqu = OquUrdisi.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'oqu-urdisi.html', {
         'informations': informations,
         'galerys': galerys,
-        'oqu': oqu
+        'oqu': oqu,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def KesteHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    keste = SabaqKeste.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    keste = SabaqKeste.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'keste.html', {
         'informations': informations,
         'galerys': galerys,
-        'keste': keste
+        'keste': keste,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def StudentHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    student = StudentJetistik.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    student = StudentJetistik.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'student.html', {
         'informations': informations,
         'galerys': galerys,
-        'student': student
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 
 def AqparatHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    aqparat = Aqparat.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    aqparat = Aqparat.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'aqparat.html', {
         'informations': informations,
         'galerys': galerys,
-        'aqparat': aqparat
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def JumysqaOrnalasuHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    jumys = JumysqaOrnalasu.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    jumys = JumysqaOrnalasu.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'jumysqa-ornalasu.html', {
         'informations': informations,
         'galerys': galerys,
-        'jumys': jumys
+        'jumys': jumys,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def PartnerHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    partner = Seriktester.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    partner = Seriktester.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'partner.html', {
         'informations': informations,
         'galerys': galerys,
-        'partner': partner
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
 def SaualnamaHandler(request):
-    informations = Information.objects.all()
-    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True)
-    saualnama = Saualnama.objects.filter(status=0).order_by('-rating')
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    saualnama = Saualnama.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'saualnama.html', {
         'informations': informations,
         'galerys': galerys,
-        'saualnama': saualnama
+        'saualnama': saualnama,
+        'langs': langs,
+        'trans_values': trans_values
     })
