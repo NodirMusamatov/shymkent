@@ -47,7 +47,7 @@
 							<i class="{{ icon.name }}"></i>
 						</span>
 						<div class="desc">
-							<h3><a href="#">{{ icon.title }}</a></h3>
+							<h3><a href="{{icon.link}}">{{ icon.title }}</a></h3>
 							<p>{{ icon.mini_description }}</p>
 						</div>
 					</div>
@@ -94,8 +94,10 @@
 						style="background-image: url(/media/{{ specialty.photo }});">
 						</a>
 						<div class="desc">
-							<h3 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><a href="/specialty/{{ specialty.id }}/">{{ specialty.title }}</a></h3>
-							<p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ specialty.description }}</p>
+							<h3 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+								<a href="/specialty/{{ specialty.id }}/">{{ specialty.title }}</a></h3>
+							<p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+								{{ specialty.description }}</p>
 							<span><a href="/specialty/{{ specialty.id }}/" class="btn btn-primary btn-sm btn-course">
 								{% for tr_val in trans_values %}{% if tr_val.code == 'tolygyraq' %}{{ tr_val.title }}{% endif %}{% endfor %}
 							</a>
@@ -185,6 +187,8 @@
 					<h3>
 						{% for tr_val in trans_values %}{% if tr_val.code == 'blog' %}{{ tr_val.title }}{% endif %}{% endfor %}
 					</h3>
+
+
 						<form id="request"  action="/" method="post">
               				{% csrf_token %}
 						<div class="row form-group">

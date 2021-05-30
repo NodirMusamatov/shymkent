@@ -96,7 +96,8 @@
 				<div class="row">
 					<div class="col-xs-2">
 						{% for information in informations %}
-						<div id="fh5co-logo"><a href="/"><img style="width: 50px;" src="/media/{{ information.logo }}"> ҚазККА</a>
+						<div id="fh5co-logo" style="width: 285px; font-size: 15px;"><a href="/"><img style="width: 50px;" src="/media/{{ information.logo }}">
+							<span>Шымкент көлік колледжі </span> </a>
 						{% endfor %}
 						</div>
 					</div>
@@ -149,7 +150,7 @@
 									<li><a href="/qurylym/">
 										{% for tr_val in trans_values %}{% if tr_val.code == 'menu12' %}{{ tr_val.title }}{% endif %}{% endfor %}
 									</a></li>
-									<li><a href="/teacher/">
+									<li><a href="/teachers/">
 										{% for tr_val in trans_values %}{% if tr_val.code == 'menu13' %}{{ tr_val.title }}{% endif %}{% endfor %}
 									</a></li>
 
@@ -288,8 +289,8 @@
 						{% for tr_val in trans_values %}{% if tr_val.code == 'footer3' %}{{ tr_val.title }}{% endif %}{% endfor %}
 					</h3>
 					<ul class="fh5co-footer-links">
-						<li><a href="{{ information.partner_info1 }}">{{ information.partner_info1 }}</a></li>
-						<li><a href="{{ information.partner_info2 }}">{{ information.partner_info2 }}</a></li>
+						<li><a href="{{ information.partner_info1_link }}">{{ information.partner_info1 }}</a></li>
+						<li><a href="{{ information.partner_info2_link }}">{{ information.partner_info2 }}</a></li>
 					</ul>
 				</div>
 
@@ -347,6 +348,7 @@
 	<script src="/static/js/simplyCountdown.js"></script>
 	<!-- Main -->
 	<script src="/static/js/main.js"></script>
+
 	<script>
     var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 

@@ -27,8 +27,7 @@ def indexHandler(request):
         news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         galerys = Galery.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         kartas = Karta.objects.filter(lang__code=current_lang)
-        print('*'*100)
-        print(comentarys)
+
 
         return render(request, 'index.html', {
             'langs':langs,
@@ -142,6 +141,10 @@ def TeacherHandler(request):
 
 
 def AboutHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
     informations = Information.objects.filter(lang__code=current_lang)
 
     galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
@@ -150,7 +153,9 @@ def AboutHandler(request):
     return render(request, 'about.html', {
         'informations': informations,
         'galerys': galerys,
-        'about': about
+        'about': about,
+        'langs': langs,
+        'trans_values': trans_values
     })
 
 
