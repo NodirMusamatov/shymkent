@@ -5,7 +5,7 @@ from main.models import Teacher, Baza, Qabyldau, Biliktilik, Video, KollejTarihi
 from main.models import Qurylym, OquAdisteme, AdistemelikKabinet, JasMaman, Birlestikter, Jetistikter, Qashyqtyq
 from main.models import OquUrdisi, SabaqKeste, StudentJetistik, Aqparat, JumysqaOrnalasu, Seriktester, Saualnama
 import math
-from main.models import Languages, TransValue
+from main.models import Languages, TransValue, Missiya, Jemqorlyq, KenesJospary
 
 # Create your views here.
 
@@ -297,6 +297,27 @@ def QurylymHandler(request):
         'trans_values': trans_values
     })
 
+def MissiyaHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    missiya = Missiya.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+    return render(request, 'qurylym.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'missiya': missiya,
+        'langs': langs,
+        'trans_values': trans_values
+    })
+
+
+
 
 def OquAdistemeHandler(request):
     current_lang = request.session.get('lang', 'ru')
@@ -316,6 +337,23 @@ def OquAdistemeHandler(request):
         'trans_values': trans_values
     })
 
+def JemqorlyqHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    jemqorlyq = Jemqorlyq.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+    return render(request, 'oqu-adisteme.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'jemqorlyq': jemqorlyq,
+        'langs': langs,
+        'trans_values': trans_values
+    })
 
 
 def AdistemelikKabinetHandler(request):
@@ -373,6 +411,25 @@ def BirlestikHandler(request):
         'langs': langs,
         'trans_values': trans_values
     })
+
+def KenesJosparyHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang).filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    kenes = KenesJospary.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+    return render(request, 'birlestik.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'kenes': kenes,
+        'langs': langs,
+        'trans_values': trans_values
+    })
+
 
 def JetistikHandler(request):
     current_lang = request.session.get('lang', 'ru')

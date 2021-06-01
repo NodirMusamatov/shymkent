@@ -118,10 +118,24 @@ admin.site.register(Qurylym, QurylymAdmin)
 
 
 
+class MissiyaAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Missiya, MissiyaAdmin)
+
+
+
+class KenesJosparyAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(KenesJospary, KenesJosparyAdmin)
+
+
 class OquAdistemeAdmin(admin.ModelAdmin):
     pass
 admin.site.register(OquAdisteme, OquAdistemeAdmin)
 
+class JemqorlyqAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Jemqorlyq, JemqorlyqAdmin)
 
 
 class AdistemelikKabinetAdmin(admin.ModelAdmin):

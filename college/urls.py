@@ -23,7 +23,7 @@ from main.views import AboutHandler, BazaHandler, VideoHandler, QabyldauHandler,
 from main.views import AcredatsiyaHandler, QurylymHandler, OquAdistemeHandler, AdistemelikKabinetHandler
 from main.views import JasMamanHandler, BirlestikHandler, JetistikHandler, OquHandler, OquUrdisiHandler, KesteHandler
 from main.views import StudentHandler, AqparatHandler, JumysqaOrnalasuHandler,  PartnerHandler, SaualnamaHandler
-
+from main.views import MissiyaHandler, JemqorlyqHandler, KenesJosparyHandler
 
 
 urlpatterns = [
@@ -40,11 +40,13 @@ urlpatterns = [
     path('biliktilik/', BiliktilikHandler),
     path('license/', LicenseHandler),
     path('acredatsiya/', AcredatsiyaHandler),
-    path('qurylym/', QurylymHandler),
+    path('missiya/', MissiyaHandler),
     path('oqu-adisteme/', OquAdistemeHandler),
+    path('jemqorlyq/', JemqorlyqHandler),
     path('adisteme-kabineti/', AdistemelikKabinetHandler),
     path('jas-maman/', JasMamanHandler),
     path('birlestik/', BirlestikHandler),
+    path('kenes-jospary/', KenesJosparyHandler),
     path('jetistik/', JetistikHandler),
     path('oqu/', OquHandler),
     path('oqu-urdisi/', OquUrdisiHandler),

@@ -170,26 +170,24 @@
 		</div>
 	</div>
 
-	<div id="fh5co-pricing" class="">
-		{% for karta in kartas %}
-		<div class="container-fluid">
+
+
+<div id="fh5co-contact">
+	{% for karta in kartas %}
+		<div class="container">
 			<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 					<h2>{{ karta.main_title }}</h2>
 					<p>{{ karta.description }}</p>
-				</div>
+			</div>
 			<div class="row">
-				<div class="col-sm-7">
-					<iframe src="{{ karta.address_link }}" width="750" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-
+				<div class="col-md-8  animate-box">
+						<iframe src="{{ karta.address_link }}" width="750" height="460" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 				</div>
-				<div class="col-sm-5">
-					<div class="col-md animate-box">
+				<div class="col-md-4 animate-box">
 					<h3>
 						{% for tr_val in trans_values %}{% if tr_val.code == 'blog' %}{{ tr_val.title }}{% endif %}{% endfor %}
 					</h3>
-
-
-						<form id="request"  action="/" method="post">
+					<form id="request"  action="/" method="post">
               				{% csrf_token %}
 						<div class="row form-group">
 							<div class="col-md-6">
@@ -209,7 +207,7 @@
 						<div class="row form-group">
 							<div class="col-md-12">
 								<!-- <label for="email">Email</label> -->
-								<input type="number" id="phone" class="form-control"
+								<input type="text" id="phone" class="form-control"
 					 placeholder="{% for tr_val in trans_values %}{% if tr_val.code == 'form3' %}{{ tr_val.title }}{% endif %}{% endfor %}"
 								name="phone">
 							</div>
@@ -232,12 +230,19 @@
 
 					</form>
 				</div>
-				</div>
 			</div>
 
 		</div>
-		{% endfor %}
+	{% endfor %}
 	</div>
+
+
+
+
+
+
+
+
 
 	{% endblock %}
 

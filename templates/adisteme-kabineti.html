@@ -6,17 +6,23 @@
 
 
 
-	<div class="container">
-		{% for k in kabinet %}
-			<div class="card">
-			  <h5 class="card-header"><img style="width: 100%; height: 450px;" src="/media/{{ k.photo }}"></h5>
-			  <div class="card-body">
-			    <h5 class="card-title">{{ k.title }}</h5>
-			    <p class="card-text"> {{ k.short_description }}</p>
-				  </div>
+	<div id="fh5co-about">
+    {% for k in kabinet %}
+		<div class="container">
+			<div class="col-md-6 animate-box">
+				<h2>{{ k.title }}</h2>
+				 {{ k.short_description }}
 			</div>
-		{% endfor %}
+			<div class="col-md-6">
+				{% if k.photo %}
+				<h5 class="card-header"><img style="width: 100%;" src="/media/{{ k.photo }}"></h5>
+				{% endif%}
+				<p></p>
+			</div>
+		</div>
+    {% endfor %}
 	</div>
+
 
 
 

@@ -11,11 +11,11 @@
 *
 * ======================================================= */
 body {
-  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-family: 'Roboto',Helvetica,Arial,Lucida,sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.7;
-  color: #828282;
+  color: #3e4146;
   background: #fff;
 }
 

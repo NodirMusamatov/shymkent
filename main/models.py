@@ -1,47 +1,47 @@
 from django.db import models
 
 class Languages(models.Model):
-    title = models.CharField(max_length=300, blank=True)
-    code = models.CharField(max_length=300, blank=True)
-    extra_title = models.CharField(max_length=300, blank=True)
+    title = models.TextField(blank=True)
+    code = models.TextField(blank=True)
+    extra_title = models.TextField(blank=True)
     def __str__(self):
         return self.title
 
 class TransValue(models.Model):
-    code = models.CharField(max_length=300, blank=True)
-    title = models.CharField(max_length=300, blank=True)
+    code = models.TextField(blank=True)
+    title = models.TextField(blank=True)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
 
     def __str__(self):
         return self.title + ' ' + self.code
 # Create your models here.
 class Information(models.Model):
-    knopka = models.CharField(max_length=300, blank=True)
-    knopka_link = models.CharField(max_length=300, blank=True)
-    address = models.CharField(max_length=300, blank=True)
-    address_name = models.CharField(max_length=300, blank=True)
-    facebook_info = models.CharField(max_length=300, blank=True)
-    instagram_info = models.CharField(max_length=300, blank=True)
-    whatsapp_info = models.CharField(max_length=300, blank=True)
-    youtube_info = models.CharField(max_length=300, blank=True)
-    email_info = models.CharField(max_length=300, blank=True)
-    email_info_link = models.CharField(max_length=300, blank=True)
-    phone_info1 = models.CharField(max_length=300, blank=True)
-    phone_info1_link = models.CharField(max_length=300, blank=True)
-    phone_info2 = models.CharField(max_length=300, blank=True)
-    phone_info2_link = models.CharField(max_length=300, blank=True)
-    partner_info1 = models.CharField(max_length=300, blank=True)
-    partner_info1_link = models.CharField(max_length=300, blank=True)
-    partner_info2 = models.CharField(max_length=300, blank=True)
-    partner_info2_link = models.CharField(max_length=300, blank=True)
-    partner_info3 = models.CharField(max_length=300, blank=True)
-    partner_info3_link = models.CharField(max_length=300, blank=True)
-    menu_info1 = models.CharField(max_length=300, blank=True)
-    menu_info1_link = models.CharField(max_length=300, blank=True)
-    menu_info2 = models.CharField(max_length=300, blank=True)
-    menu_info2_link = models.CharField(max_length=300, blank=True)
-    menu_info3 = models.CharField(max_length=300, blank=True)
-    menu_info3_link = models.CharField(max_length=300, blank=True)
+    knopka = models.TextField(blank=True)
+    knopka_link = models.TextField(blank=True)
+    address = models.TextField(blank=True)
+    address_name = models.TextField(blank=True)
+    facebook_info = models.TextField(blank=True)
+    instagram_info = models.TextField(blank=True)
+    whatsapp_info = models.TextField(blank=True)
+    youtube_info = models.TextField(blank=True)
+    email_info = models.TextField(blank=True)
+    email_info_link = models.TextField(blank=True)
+    phone_info1 = models.TextField(blank=True)
+    phone_info1_link = models.TextField(blank=True)
+    phone_info2 = models.TextField(blank=True)
+    phone_info2_link = models.TextField(blank=True)
+    partner_info1 = models.TextField(blank=True)
+    partner_info1_link = models.TextField(blank=True)
+    partner_info2 = models.TextField(blank=True)
+    partner_info2_link = models.TextField(blank=True)
+    partner_info3 = models.TextField(blank=True)
+    partner_info3_link = models.TextField(blank=True)
+    menu_info1 = models.TextField(blank=True)
+    menu_info1_link = models.TextField(blank=True)
+    menu_info2 = models.TextField(blank=True)
+    menu_info2_link = models.TextField(blank=True)
+    menu_info3 = models.TextField(blank=True)
+    menu_info3_link = models.TextField(blank=True)
     status = models.IntegerField(default=0, blank=True)
     logo = models.ImageField(upload_to='upload', blank=True)
     lang = models.ForeignKey(Languages,  on_delete=models.CASCADE, default=1, blank=True)
@@ -50,7 +50,7 @@ class Information(models.Model):
         return self.address
 
 class Slider(models.Model):
-    main_title = models.CharField(max_length=300, blank=True)
+    main_title = models.TextField(blank=True)
     photo = models.ImageField(upload_to='upload')
     mini_description = models.CharField(max_length=500, blank=True)
     status = models.IntegerField(default=0)
@@ -63,13 +63,13 @@ class Slider(models.Model):
 
 
 class Icon(models.Model):
-    main_title = models.CharField(max_length=300, blank=True)
+    main_title = models.TextField(blank=True)
     description = models.CharField(max_length=500, blank=True)
     #icon = models.ImageField(upload_to='upload', blank=True)
-    name = models.CharField(max_length=300, blank=True)
-    title = models.CharField(max_length=300, blank=True)
+    name = models.TextField(blank=True)
+    title = models.TextField(blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
-    link = models.CharField(max_length=300, blank=True)
+    link = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -79,8 +79,8 @@ class Icon(models.Model):
 
 class About(models.Model):
     # icon = models.ImageField(upload_to='upload', blank=True)
-    logo = models.CharField(max_length=300, blank=True)
-    name = models.CharField(max_length=300, blank=True)
+    logo = models.TextField(blank=True)
+    name = models.TextField(blank=True)
     count = models.IntegerField(default=0)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -91,10 +91,10 @@ class About(models.Model):
 
 
 class Specialty(models.Model):
-    main_title = models.CharField(max_length=300, blank=True)
+    main_title = models.TextField(blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
+    title = models.TextField(blank=True)
     description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -121,13 +121,13 @@ class Comentary(models.Model):
         return self.last_name + ' ' + self.lang.code
 
 class News(models.Model):
-    title = models.CharField(max_length=300, blank=True)
+    title = models.TextField(blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
     photo1 = models.ImageField(upload_to='upload')
     photo2 = models.ImageField(upload_to='upload')
     photo3 = models.ImageField(upload_to='upload')
     name = models.CharField(max_length=300)
-    date = models.CharField(max_length=300, blank=True)
+    date = models.TextField(blank=True)
     description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -140,7 +140,7 @@ class News(models.Model):
 
 
 class Karta(models.Model):
-    main_title = models.CharField(max_length=300, blank=True)
+    main_title = models.TextField(blank=True)
     mini_description = models.CharField(max_length=500, blank=True)
     address_link = models.CharField(max_length=500, blank=True)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -171,14 +171,14 @@ class Galery(models.Model):
 
 class Teacher(models.Model):
     photo = models.ImageField(upload_to='upload')
-    last_name = models.CharField(max_length=300, blank=True)
-    first_name = models.CharField(max_length=300, blank=True)
-    surname = models.CharField(max_length=300, blank=True)
-    position = models.CharField(max_length=300, blank=True)
-    facebook = models.CharField(max_length=300, blank=True)
-    instagram = models.CharField(max_length=300, blank=True)
-    whatsapp = models.CharField(max_length=300, blank=True)
-    telegram = models.CharField(max_length=300, blank=True)
+    last_name = models.TextField(blank=True)
+    first_name = models.TextField(blank=True)
+    surname = models.TextField(blank=True)
+    position = models.TextField(blank=True)
+    facebook = models.TextField(blank=True)
+    instagram = models.TextField(blank=True)
+    whatsapp = models.TextField(blank=True)
+    telegram = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     is_main = models.BooleanField(default=0, blank=True)
@@ -190,8 +190,8 @@ class Teacher(models.Model):
 
 class Baza(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -202,8 +202,8 @@ class Baza(models.Model):
 
 class Qabyldau(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -213,8 +213,8 @@ class Qabyldau(models.Model):
 
 class Biliktilik(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -223,8 +223,8 @@ class Biliktilik(models.Model):
         return self.title
 
 class Video(models.Model):
-    title = models.CharField(max_length=300, blank=True)
-    vide_link = models.CharField(max_length=300, blank=True)
+    title = models.TextField(blank=True)
+    vide_link = models.TextField(blank=True)
     description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -235,8 +235,8 @@ class Video(models.Model):
 
 class KollejTarihi(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -246,8 +246,8 @@ class KollejTarihi(models.Model):
 
 class License(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -257,8 +257,8 @@ class License(models.Model):
 
 class Acredatsiya(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -267,8 +267,18 @@ class Acredatsiya(models.Model):
 
 class Qurylym(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
+class Missiya(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -277,18 +287,30 @@ class Qurylym(models.Model):
 
 class OquAdisteme(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
     def __str__(self):
         return self.title
 
+
+class Jemqorlyq(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
+
 class AdistemelikKabinet(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -298,8 +320,8 @@ class AdistemelikKabinet(models.Model):
 
 class JasMaman(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -309,8 +331,18 @@ class JasMaman(models.Model):
 
 class Birlestikter(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
+class KenesJospary(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -319,8 +351,8 @@ class Birlestikter(models.Model):
 
 class Jetistikter(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -329,8 +361,8 @@ class Jetistikter(models.Model):
 
 class Qashyqtyq(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -339,8 +371,8 @@ class Qashyqtyq(models.Model):
 
 class OquUrdisi(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -349,8 +381,8 @@ class OquUrdisi(models.Model):
 
 class SabaqKeste(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -359,8 +391,8 @@ class SabaqKeste(models.Model):
 
 class StudentJetistik(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -369,8 +401,8 @@ class StudentJetistik(models.Model):
 
 class Aqparat(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -379,8 +411,8 @@ class Aqparat(models.Model):
 
 class JumysqaOrnalasu(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -389,8 +421,8 @@ class JumysqaOrnalasu(models.Model):
 
 class Seriktester(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
@@ -399,8 +431,8 @@ class Seriktester(models.Model):
 
 class Saualnama(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
-    title = models.CharField(max_length=300, blank=True)
-    short_description = models.CharField(max_length=600, blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
     status = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
