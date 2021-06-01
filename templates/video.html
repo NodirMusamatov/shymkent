@@ -20,6 +20,7 @@
 		<div class="container" style="width:853px; height:320px;">
 			{% for v in video %}
 			<p> {{ v.description }}  </p>
+			<p><a href="{{ v.link }}">{{ v.link }}</a></p>
 			{% endfor %}
 		</div>
 	</div>

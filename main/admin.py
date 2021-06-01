@@ -183,6 +183,15 @@ class OquUrdisiAdmin(admin.ModelAdmin):
     pass
 admin.site.register(OquUrdisi, OquUrdisiAdmin)
 
+class OquAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Oqu, OquAdmin)
+
+
+class TulekterAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Tulekter, TulekterAdmin)
+
 
 class SabaqKesteAdmin(admin.ModelAdmin):
     pass

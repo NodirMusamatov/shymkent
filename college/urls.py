@@ -24,7 +24,7 @@ from main.views import AcredatsiyaHandler, QurylymHandler, OquAdistemeHandler, A
 from main.views import JasMamanHandler, BirlestikHandler, JetistikHandler, OquHandler, OquUrdisiHandler, KesteHandler
 from main.views import StudentHandler, AqparatHandler, JumysqaOrnalasuHandler,  PartnerHandler, SaualnamaHandler
 from main.views import MissiyaHandler, JemqorlyqHandler, KenesJosparyHandler, StudenttikKenesHandler, BitirushilerHandler
-from main.views import StudenttikOmirHandler, TalapkerHandler
+from main.views import StudenttikOmirHandler, TalapkerHandler, OquHandler, TulekterHandler
 
 
 urlpatterns = [
@@ -61,6 +61,7 @@ urlpatterns = [
     path('bitirushiler/', BitirushilerHandler),
     path('studenttik-omir/', StudenttikOmirHandler),
     path('talapker/', TalapkerHandler),
+    path('tulekter/', TulekterHandler),
 
 
     url(r'^media/(?P<path>.*)$', serve, {

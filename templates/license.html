@@ -5,16 +5,25 @@
 
 
 
-	<div class="container">
-		{% for l in license %}
-			<div class="card">
-                <h5 class="card-header"><img style="width: 100%; height: 450px;" src="/media/{{ l.photo }}"></h5>
-                <div class="card-body">
-                  <h5 class="card-title">{{ l.title }}</h5>
-                  <p class="card-text"> {{ l.short_description }}</p>
-                </div>
+
+	<div id="fh5co-about">
+    {% for l in license %}
+		<div class="container">
+			<div class="col-md-6 animate-box">
+				<h2>{{ l.title }}</h2>
+				 {{ l.short_description }}
+				<p><a href="/media/{{ l.word }}" target="_blank">{{ l.word_title }}</a></p>
+				<p><a href="/media/{{ l.pdf }}" target="_blank">{{ l.pdf_title }}</a></p>
+				<p><a href="{{ l.link }}">{{ j.link }}</a></p>
 			</div>
-		{% endfor %}
+			<div class="col-md-6">
+				{% if l.photo %}
+				<h5 class="card-header"><img style="width: 100%;" src="/media/{{ l.photo }}"></h5>
+				{% endif%}
+				<p></p>
+			</div>
+		</div>
+    {% endfor %}
 	</div>
 
 

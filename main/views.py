@@ -6,7 +6,7 @@ from main.models import Qurylym, OquAdisteme, AdistemelikKabinet, JasMaman, Birl
 from main.models import OquUrdisi, SabaqKeste, StudentJetistik, Aqparat, JumysqaOrnalasu, Seriktester, Saualnama
 import math
 from main.models import Languages, TransValue, Missiya, Jemqorlyq, KenesJospary, StudenttikKenes, Bitirushiler
-from main.models import StudenttikOmir, Talapker
+from main.models import StudenttikOmir, Talapker, Oqu, Tulekter
 # Create your views here.
 
 def indexHandler(request):
@@ -459,7 +459,7 @@ def OquHandler(request):
     informations = Information.objects.filter(lang__code=current_lang)
 
     galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
-    oqu = Qashyqtyq.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+    oqu = Oqu.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
     return render(request, 'oqu.html', {
@@ -609,6 +609,7 @@ def PartnerHandler(request):
         'informations': informations,
         'galerys': galerys,
         'langs': langs,
+        'partner': partner,
         'trans_values': trans_values
     })
 
@@ -691,4 +692,24 @@ def TalapkerHandler(request):
         'langs': langs,
         'trans_values': trans_values,
         'talapker': talapker
+    })
+
+
+def TulekterHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    tulekter = Tulekter.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+
+    return render(request, 'tulekter.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'langs': langs,
+        'trans_values': trans_values,
+        'tulekter': tulekter
     })
