@@ -23,7 +23,8 @@ from main.views import AboutHandler, BazaHandler, VideoHandler, QabyldauHandler,
 from main.views import AcredatsiyaHandler, QurylymHandler, OquAdistemeHandler, AdistemelikKabinetHandler
 from main.views import JasMamanHandler, BirlestikHandler, JetistikHandler, OquHandler, OquUrdisiHandler, KesteHandler
 from main.views import StudentHandler, AqparatHandler, JumysqaOrnalasuHandler,  PartnerHandler, SaualnamaHandler
-from main.views import MissiyaHandler, JemqorlyqHandler, KenesJosparyHandler
+from main.views import MissiyaHandler, JemqorlyqHandler, KenesJosparyHandler, StudenttikKenesHandler, BitirushilerHandler
+from main.views import StudenttikOmirHandler, TalapkerHandler
 
 
 urlpatterns = [
@@ -49,13 +50,17 @@ urlpatterns = [
     path('kenes-jospary/', KenesJosparyHandler),
     path('jetistik/', JetistikHandler),
     path('oqu/', OquHandler),
-    path('oqu-urdisi/', OquUrdisiHandler),
+    path('jastar/', OquUrdisiHandler),
+    path('studenttik-kenes/', StudenttikKenesHandler),
     path('keste/', KesteHandler),
-    path('student/', StudentHandler),
+    path('student-jetistigi/', StudentHandler),
     path('aqparat/', AqparatHandler),
     path('jumysqa-ornalasu/', JumysqaOrnalasuHandler),
     path('partner/', PartnerHandler),
-    path('saualnama/', SaualnamaHandler),
+    path('ata-analar/', SaualnamaHandler),
+    path('bitirushiler/', BitirushilerHandler),
+    path('studenttik-omir/', StudenttikOmirHandler),
+    path('talapker/', TalapkerHandler),
 
 
     url(r'^media/(?P<path>.*)$', serve, {

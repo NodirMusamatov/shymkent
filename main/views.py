@@ -5,8 +5,8 @@ from main.models import Teacher, Baza, Qabyldau, Biliktilik, Video, KollejTarihi
 from main.models import Qurylym, OquAdisteme, AdistemelikKabinet, JasMaman, Birlestikter, Jetistikter, Qashyqtyq
 from main.models import OquUrdisi, SabaqKeste, StudentJetistik, Aqparat, JumysqaOrnalasu, Seriktester, Saualnama
 import math
-from main.models import Languages, TransValue, Missiya, Jemqorlyq, KenesJospary
-
+from main.models import Languages, TransValue, Missiya, Jemqorlyq, KenesJospary, StudenttikKenes, Bitirushiler
+from main.models import StudenttikOmir, Talapker
 # Create your views here.
 
 def indexHandler(request):
@@ -24,7 +24,7 @@ def indexHandler(request):
         abouts = About.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating')
         specialtys = Specialty.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         comentarys = Comentary.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
-        news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
+        news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)[:3]
         galerys = Galery.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
         kartas = Karta.objects.filter(lang__code=current_lang)
 
@@ -511,6 +511,28 @@ def KesteHandler(request):
     })
 
 
+def StudenttikKenesHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    student = StudenttikKenes.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+
+    return render(request, 'studenttik-kenes.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'student': student,
+        'langs': langs,
+        'trans_values': trans_values
+    })
+
+
+
+
 def StudentHandler(request):
     current_lang = request.session.get('lang', 'ru')
     langs = Languages.objects.all()
@@ -519,11 +541,12 @@ def StudentHandler(request):
     informations = Information.objects.filter(lang__code=current_lang)
 
     galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
-    student = StudentJetistik.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+    jetistik = StudentJetistik.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
 
 
-    return render(request, 'student.html', {
+    return render(request, 'student-jetistikteri.html', {
         'informations': informations,
+        'jetistik': jetistik,
         'galerys': galerys,
         'langs': langs,
         'trans_values': trans_values
@@ -540,12 +563,13 @@ def AqparatHandler(request):
 
     galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
     aqparat = Aqparat.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
-
+    news = News.objects.filter(status=0).filter(lang__code=current_lang).order_by('-rating').filter(is_main=True)
 
     return render(request, 'aqparat.html', {
         'informations': informations,
         'galerys': galerys,
         'langs': langs,
+        'news': news,
         'trans_values': trans_values
     })
 
@@ -606,4 +630,65 @@ def SaualnamaHandler(request):
         'saualnama': saualnama,
         'langs': langs,
         'trans_values': trans_values
+    })
+
+
+def BitirushilerHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    bitirushiler = Bitirushiler.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+
+    return render(request, 'bitirushiler.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'bitirushiler': bitirushiler,
+        'langs': langs,
+        'trans_values': trans_values
+    })
+
+
+def StudenttikOmirHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    omir = StudenttikOmir.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+
+    return render(request, 'studenttik-omir.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'omir': omir,
+        'langs': langs,
+        'trans_values': trans_values
+    })
+
+
+def TalapkerHandler(request):
+    current_lang = request.session.get('lang', 'ru')
+    langs = Languages.objects.all()
+    trans_values = TransValue.objects.filter(lang__code=current_lang)
+
+    informations = Information.objects.filter(lang__code=current_lang)
+
+    galerys = Galery.objects.filter(status=0).order_by('-rating').filter(is_main=True).filter(lang__code=current_lang)
+    talapker = Talapker.objects.filter(status=0).order_by('-rating').filter(lang__code=current_lang)
+
+
+    return render(request, 'talapker.html', {
+        'informations': informations,
+        'galerys': galerys,
+        'talapker': talapker,
+        'langs': langs,
+        'trans_values': trans_values,
+        'talapker': talapker
     })

@@ -123,7 +123,6 @@ class MissiyaAdmin(admin.ModelAdmin):
 admin.site.register(Missiya, MissiyaAdmin)
 
 
-
 class KenesJosparyAdmin(admin.ModelAdmin):
     pass
 admin.site.register(KenesJospary, KenesJosparyAdmin)
@@ -158,6 +157,21 @@ admin.site.register(Birlestikter, BirlestikterAdmin)
 class JetistikterAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Jetistikter, JetistikterAdmin)
+
+
+class StudenttikKenesAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(StudenttikKenes, StudenttikKenesAdmin)
+
+
+class BitirushilerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Bitirushiler, BitirushilerAdmin)
+
+
+class StudenttikOmirAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(StudenttikOmir, StudenttikOmirAdmin)
 
 
 class QashyqtyqAdmin(admin.ModelAdmin):
@@ -198,3 +212,8 @@ admin.site.register(Seriktester, SeriktesterAdmin)
 class SaualnamaAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Saualnama, SaualnamaAdmin)
+
+
+class TalapkerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Talapker, TalapkerAdmin)

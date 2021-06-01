@@ -399,6 +399,16 @@ class StudentJetistik(models.Model):
     def __str__(self):
         return self.title
 
+class StudenttikKenes(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
 class Aqparat(models.Model):
     photo = models.ImageField(upload_to='upload', blank=True)
     title = models.TextField(blank=True)
@@ -440,5 +450,36 @@ class Saualnama(models.Model):
         return self.title
 
 
+
+class Bitirushiler(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
+class StudenttikOmir(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
+
+
+class Talapker(models.Model):
+    photo = models.ImageField(upload_to='upload', blank=True)
+    title = models.TextField(blank=True)
+    short_description = models.TextField(blank=True)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    lang = models.ForeignKey(Languages, on_delete=models.CASCADE, default=1, blank=True)
+    def __str__(self):
+        return self.title
 
 
